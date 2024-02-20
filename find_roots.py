@@ -1,3 +1,9 @@
+# there are other ways to do this described here:
+# https://stackoverflow.com/questions/35795663/fastest-way-to-find-the-smallest-positive-real-root-of-quartic-polynomial-4-degr
+# since I only need the smallest values anyway this would work
+# but copying and pasting is boring so instead I made this which can find all the roots of most equations
+# I could also just use the quartic formula but it seems like nobody has already typed that all out
+# and there is no way I am typing out a few hundred characters just to hit a key wrong and spend hours trying to figure out where the error is
 
 
 
