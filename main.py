@@ -1,15 +1,16 @@
 import math
 import numpy
+from find_roots import root_finder
 
 #shooting_theta = math.pi/3 # radians
-shooting_velo = 20 # random number
+shooting_velo = 13.6179301588 # probably right
 
 a_y = -9.8 # gravity
 v_y = 0
-p_y = -7 # vertical distance from target
+p_y = -2 # vertical distance from target
 a_x = 0 # pretend this doesn't exist because i don't feel like doing air resistance
 v_x = 0
-p_x = -30 # horizontal distance from target
+p_x = -5 # horizontal distance from target
 
 t4 = (a_x**2 + a_y**2)/4
 t3 = (a_x*v_x + a_y*v_y)
@@ -17,25 +18,26 @@ t2 = (v_x**2 + p_x*a_x + v_y**2 + p_y*a_y - shooting_velo**2)
 t1 = 2*(p_x*v_x + p_y*v_y)
 t0 = (p_x**2 + p_y**2)
 
-roots = list(numpy.roots([t4, t3, t2, t1, t0]))
-print(roots)
+#roots = list(numpy.roots([t4, t3, t2, t1, t0]))
+roots = root_finder([t4, t3, t2, t1, t0], 0.01)
+#print(roots)
 num_roots = 0
 t = -1
 for i in reversed(sorted(roots)):
     # if the number is a positive real number
-    if not (type(i) == numpy.float64 and i > 0):
+    if not (i > 0): # if using numpy root finder use "if not (type(i) == numpy.float64 and i > 0):"
         roots.remove(i)
-print(roots)
+#print(roots)
 if len(roots) == 0:
     print("no solutions")
     exit()
 t = min(roots) # not max because we want a low shooting angle
 
-print(t)
+#print(t)
 p_aimX = -(p_x + v_x*t + (a_x*(t**2))/2)
 p_aimY = -(p_y + v_y*t + (a_y*(t**2))/2)
-print(p_aimX)
-print(p_aimY)
+#print(p_aimX)
+#print(p_aimY)
 shooting_theta = math.atan(p_aimY/p_aimX)
 
 with open("desmos stuffs.txt", "w") as desmos:
