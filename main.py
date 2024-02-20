@@ -9,7 +9,7 @@ v_y = 0
 p_y = -7 # vertical distance from target
 a_x = 0 # pretend this doesn't exist because i don't feel like doing air resistance
 v_x = 0
-p_x = -10 # horizontal distance from target
+p_x = -30 # horizontal distance from target
 
 t4 = (a_x**2 + a_y**2)/4
 t3 = (a_x*v_x + a_y*v_y)
@@ -21,16 +21,15 @@ roots = list(numpy.roots([t4, t3, t2, t1, t0]))
 print(roots)
 num_roots = 0
 t = -1
-for i in roots:
+for i in reversed(sorted(roots)):
     # if the number is a positive real number
     if not (type(i) == numpy.float64 and i > 0):
         roots.remove(i)
 print(roots)
-t = min(roots)
-if t == -1:
+if len(roots) == 0:
     print("no solutions")
     exit()
-
+t = min(roots) # not max because we want a low shooting angle
 
 print(t)
 p_aimX = -(p_x + v_x*t + (a_x*(t**2))/2)
